@@ -5,7 +5,7 @@ critical_threshold=""
 warning_threshold=""
 email_address=""
 
-# Parse command-line parameters using getopts
+# A while loop to get the value of the parameters
 while getopts "c:w:e:" option;
 do
 	case "$option" in
