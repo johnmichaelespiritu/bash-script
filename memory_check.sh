@@ -30,3 +30,7 @@ then
 	echo "Critical threshold must be greater than the warning threshold. Please try again."
 	exit
 fi
+
+# Calculate the memory usage
+used_memory_percentage=$(free | grep Mem: | awk '{print $3/$2 * 100}')
+echo $used_memory_percentage
