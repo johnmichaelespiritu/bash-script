@@ -5,7 +5,7 @@ critical_threshold=""
 warning_threshold=""
 email_address=""
 
-# A while loop to get the value of the parameters
+# A while loop to retrieve the value of the parameters regardless of their position.
 while getopts "c:w:e:" option;
 do
 	case "$option" in
@@ -17,7 +17,9 @@ do
 	esac
 done
 
-echo $critical_threshold
-echo $warning_threshold
-echo $email_address
-
+# Check for missing parameters
+if [ -z "$critical_threshold" ] || [ -z "$warning_threshold" ] || [ -z "$email_address" ] 
+then
+	  echo "Required parameters are missing: -c, -w, and -e"
+	  exit
+fi
