@@ -32,5 +32,18 @@ then
 fi
 
 # Calculate the memory usage
-used_memory_percentage=$(free | grep Mem: | awk '{print $3/$2 * 100}')
-echo $used_memory_percentage
+used_memory_percentage=$(free | grep Mem: | awk '{printf "%.0f", $3/$2 * 100}')
+
+# Check whether the used memory percentage is greater than or equal to the critical threshold and the warning threshold, or if the memory is less than the warning threshold.
+if [ "$used_memory_percentage" -ge "$critical_threshold" ]
+then
+	echo "Used memory is greater than or equal to critical threshold."
+	exit 2
+elif [ "$used_memory_percentage" -ge "$warning_threshold" ]
+then
+	echo "Used memory is greater than or equal to warning threshold but less than critical threshold."
+	exit 1
+else
+	echo "Used memory is less than warning threshold."
+	exit 0
+fi
