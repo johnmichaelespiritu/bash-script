@@ -13,13 +13,20 @@ do
 		w) warning_threshold="$OPTARG" ;;
 		e) email_address="$OPTARG" ;;
 		*) echo "Invalid option: -$option" >&2
-		   exit 1 ;;
+		   exit ;;
 	esac
 done
 
 # Check for missing parameters
 if [ -z "$critical_threshold" ] || [ -z "$warning_threshold" ] || [ -z "$email_address" ] 
 then
-	  echo "Required parameters are missing: -c, -w, and -e"
-	  exit
+	echo "Required parameters are missing: -c, -w, and -e. Please try again."
+	exit
+fi
+
+# Check if the provided critical threshold is greater than the warning threshold
+if [ "$critical_threshold" -le "$warning_threshold" ]
+then
+	echo "Critical threshold must be greater than the warning threshold. Please try again."
+	exit
 fi
