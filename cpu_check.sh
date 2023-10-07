@@ -39,7 +39,7 @@ if [ "$used_cpu_percentage" -ge "$critical_threshold" ]
 then
 	echo "Used CPU is greater than or equal to critical threshold."	
 	exit 2
-elif [ "$used_cpu_percentage" -ge "$warning_threshold" ]
+elif [ "$used_cpu_percentage" -ge "$warning_threshold" ] && [ "$used_cpu_percentage" -lt "$critical_threshold" ]
 then
 	echo "Used CPU is greater than or equal to warning threshold but less than critical threshold."
 	exit 1
