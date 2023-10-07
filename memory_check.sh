@@ -39,7 +39,7 @@ if [ "$used_memory_percentage" -ge "$critical_threshold" ]
 then
 	echo "Used memory is greater than or equal to critical threshold."	
 	exit 2
-elif [ "$used_memory_percentage" -ge "$warning_threshold" ]
+elif [ "$used_memory_percentage" -ge "$warning_threshold" ] && [ "$used_memory_percentage" -lt "$critical_threshold" ]
 then
 	echo "Used memory is greater than or equal to warning threshold but less than critical threshold."
 	exit 1
